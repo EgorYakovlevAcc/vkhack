@@ -10,5 +10,6 @@ public interface DonateService {
 
     List<Donate> findAll();
 
+
     void deleteAll();
 }
