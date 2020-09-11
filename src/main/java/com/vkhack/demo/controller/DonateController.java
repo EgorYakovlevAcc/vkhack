@@ -29,7 +29,7 @@ public class DonateController {
         try {
             Integer price = donate.getPrice();
             Random random = new Random(price);
-            Integer collectedPrice = random.nextInt(0);
+            Integer collectedPrice = random.nextInt(price) + 1;
             donate.setCollectedPrice(collectedPrice);
             donateService.save(donate);
             return ResponseEntity.ok(null);
