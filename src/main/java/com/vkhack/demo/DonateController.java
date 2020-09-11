@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -18,19 +20,27 @@ public class DonateController {
     private PostService postService;
 
     @PostMapping("/create")
-    public ResponseEntity createDonate(@RequestBody Donate donate) {
+    public ResponseEntity createDonate(@RequestBody Donate donate, @RequestParam("image") MultipartFile multipartFile) {
         try {
             Integer price = donate.getPrice();
             Random random = new Random(price);
             Integer collectedPrice = random.nextInt();
             donate.setCollectedPrice(collectedPrice);
+            donate.setImage(getImageFromMultipartFile(multipartFile));
             donateService.save(donate);
             return ResponseEntity.ok(null);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
+    }
 
+    private byte[] getImageFromMultipartFile(MultipartFile multipartFile) {
+        try {
+            return multipartFile.getBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @GetMapping(value = {"/", "/index"})
@@ -43,8 +53,7 @@ public class DonateController {
         try {
             postService.save(post);
             return ResponseEntity.ok(null);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
@@ -64,8 +73,7 @@ public class DonateController {
         try {
             donateService.deleteAll();
             return ResponseEntity.ok(null);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
     }

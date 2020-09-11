@@ -22,6 +22,9 @@ public class Donate {
     private String title;
     private Integer price;
     private Integer collectedPrice;
+    private String bankCard;
+    @Lob
+    private byte[] image;
     private String purpose;
     @Enumerated
     private DonateType donateType;
