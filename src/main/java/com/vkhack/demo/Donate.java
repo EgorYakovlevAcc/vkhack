@@ -21,6 +21,7 @@ public class Donate {
     private Long id;
     private String title;
     private Integer price;
+    private Integer collectedPrice;
     private String purpose;
     @Enumerated
     private DonateType donateType;
