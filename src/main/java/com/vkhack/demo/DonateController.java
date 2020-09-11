@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/donate")
@@ -19,6 +20,10 @@ public class DonateController {
     @PostMapping("/create")
     public ResponseEntity createDonate(@RequestBody Donate donate) {
         try {
+            Integer price = donate.getPrice();
+            Random random = new Random(price);
+            Integer collectedPrice = random.nextInt();
+            donate.setCollectedPrice(collectedPrice);
             donateService.save(donate);
             return ResponseEntity.ok(null);
         }
