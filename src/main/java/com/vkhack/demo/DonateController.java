@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Controller
@@ -20,18 +21,33 @@ public class DonateController {
     private PostService postService;
 
     @PostMapping("/create")
-    public ResponseEntity createDonate(@RequestBody Donate donate, @RequestParam("image") MultipartFile multipartFile) {
+    public ResponseEntity createDonate(@RequestBody Donate donate) {
         try {
             Integer price = donate.getPrice();
             Random random = new Random(price);
             Integer collectedPrice = random.nextInt();
             donate.setCollectedPrice(collectedPrice);
-            donate.setImage(getImageFromMultipartFile(multipartFile));
             donateService.save(donate);
             return ResponseEntity.ok(null);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @PostMapping("/image/{id}")
+    public ResponseEntity addImageToDonate(@PathVariable("id") Long donateId,
+                                           @RequestParam("image") MultipartFile multipartFile) {
+        Optional.ofNullable(donateId)
+                .map(id -> donateService.findDonateById(id))
+                .ifPresent(donate -> {
+                    Optional.ofNullable(multipartFile)
+                            .map(this::getImageFromMultipartFile)
+                            .ifPresent(arr -> {
+                                donate.setImage(arr);
+                                donateService.save(donate);
+                            });
+                });
+        return ResponseEntity.ok(null);
     }
 
     private byte[] getImageFromMultipartFile(MultipartFile multipartFile) {
