@@ -1,4 +1,6 @@
-package com.vkhack.demo;
+package com.vkhack.demo.service;
+
+import com.vkhack.demo.model.Post;
 
 public interface PostService {
     Post save(Post post);

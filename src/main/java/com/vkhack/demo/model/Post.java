@@ -1,4 +1,4 @@
-package com.vkhack.demo;
+package com.vkhack.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

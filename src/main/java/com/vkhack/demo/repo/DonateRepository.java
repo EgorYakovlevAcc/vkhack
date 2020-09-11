@@ -1,5 +1,6 @@
-package com.vkhack.demo;
+package com.vkhack.demo.repo;
 
+import com.vkhack.demo.model.Donate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

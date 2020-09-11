@@ -1,5 +1,9 @@
-package com.vkhack.demo;
+package com.vkhack.demo.controller;
 
+import com.vkhack.demo.service.DonateService;
+import com.vkhack.demo.service.PostService;
+import com.vkhack.demo.model.Donate;
+import com.vkhack.demo.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -75,11 +79,13 @@ public class DonateController {
     }
 
     @GetMapping("/info")
+    @ResponseBody
     public Donate getDonateInfo(@RequestParam("id") Long id) {
         return donateService.findDonateById(id);
     }
 
     @GetMapping("/list")
+    @ResponseBody
     public List<Donate> getListOfDonates() {
         return donateService.findAll();
     }

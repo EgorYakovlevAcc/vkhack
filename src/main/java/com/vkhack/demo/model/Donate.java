@@ -1,5 +1,7 @@
-package com.vkhack.demo;
+package com.vkhack.demo.model;
 
+import com.vkhack.demo.model.DonateType;
+import com.vkhack.demo.model.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

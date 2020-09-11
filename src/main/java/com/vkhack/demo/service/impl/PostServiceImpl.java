@@ -1,5 +1,9 @@
-package com.vkhack.demo;
+package com.vkhack.demo.service.impl;
 
+import com.vkhack.demo.repo.DonateRepository;
+import com.vkhack.demo.repo.PostRepository;
+import com.vkhack.demo.model.Post;
+import com.vkhack.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
