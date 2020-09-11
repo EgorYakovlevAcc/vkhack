@@ -34,7 +34,7 @@ public class DonateController {
             donateService.save(donate);
             return ResponseEntity.ok(null);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("createDonate FAILED");
         }
     }
 
@@ -76,7 +76,7 @@ public class DonateController {
             postService.save(post);
             return ResponseEntity.ok(null);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("createDonatePost FAILED");
         }
     }
 
@@ -98,7 +98,7 @@ public class DonateController {
             donateService.deleteAll();
             return ResponseEntity.ok(null);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
+            return ResponseEntity.badRequest().body("getDonateInfo FAILED");
         }
     }
 }
