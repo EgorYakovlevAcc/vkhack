@@ -26,7 +26,7 @@ public class Donate {
     @Lob
     private byte[] image;
     private String purpose;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private DonateType donateType;
     @Lob
     private String describtion;
