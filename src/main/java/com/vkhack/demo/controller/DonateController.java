@@ -19,6 +19,7 @@ import java.util.Random;
 @RequestMapping("/donate")
 @CrossOrigin()
 public class DonateController {
+
     @Autowired
     private DonateService donateService;
     @Autowired
