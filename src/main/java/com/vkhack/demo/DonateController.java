@@ -45,7 +45,7 @@ public class DonateController {
     }
 
     @GetMapping("/info")
-    public Donate getDonateInfo(Long id) {
+    public Donate getDonateInfo(@RequestParam("id") Long id) {
         return donateService.findDonateById(id);
     }
 
