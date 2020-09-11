@@ -101,4 +101,14 @@ public class DonateController {
             return ResponseEntity.badRequest().body("getDonateInfo FAILED");
         }
     }
+
+    @DeleteMapping("/clear/post/{postId}")
+    public ResponseEntity removeDonates(@PathVariable("postId") Long postId) {
+        try {
+            postService.deletePostById(postId);
+            return ResponseEntity.ok(null);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("removeDonates FAILED");
+        }
+    }
 }
