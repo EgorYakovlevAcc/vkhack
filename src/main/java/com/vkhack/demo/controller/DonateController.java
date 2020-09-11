@@ -19,7 +19,6 @@ import java.util.Random;
 @RequestMapping("/donate")
 @CrossOrigin()
 public class DonateController {
-
     @Autowired
     private DonateService donateService;
     @Autowired
@@ -65,7 +64,7 @@ public class DonateController {
     }
 
     @GetMapping(value = {"/", "/index"})
-    public String getIndex(@RequestBody Donate donate) {
+    public String getIndex() {
         return "index";
     }
 
