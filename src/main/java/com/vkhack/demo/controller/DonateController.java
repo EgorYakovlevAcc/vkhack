@@ -29,7 +29,7 @@ public class DonateController {
         try {
             Integer price = donate.getPrice();
             Random random = new Random(price);
-            Integer collectedPrice = random.nextInt();
+            Integer collectedPrice = random.nextInt(0);
             donate.setCollectedPrice(collectedPrice);
             donateService.save(donate);
             return ResponseEntity.ok(null);
@@ -68,9 +68,11 @@ public class DonateController {
         return "index";
     }
 
-    @PostMapping("/post")
-    public ResponseEntity createDonatePost(@RequestBody Post post) {
+    @PostMapping("/post/{id}")
+    public ResponseEntity createDonatePost(@PathVariable("id") Long id, @RequestBody Post post) {
         try {
+            Donate donate = donateService.findDonateById(id);
+            post.setDonate(donate);
             postService.save(post);
             return ResponseEntity.ok(null);
         } catch (Exception e) {
