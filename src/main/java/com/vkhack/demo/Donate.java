@@ -29,6 +29,6 @@ public class Donate {
     private Date startDate;
     private Date endDate;
     private String author;
-    @OneToMany
+    @OneToMany(mappedBy = "donate", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Post> posts;
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +22,8 @@ public class Post {
     private Long id;
     private String text;
     private Date date;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "donate_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Donate donate;
 }
