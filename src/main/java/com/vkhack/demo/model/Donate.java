@@ -31,7 +31,7 @@ public class Donate {
     @Enumerated(EnumType.STRING)
     private DonateType donateType;
     @Lob
-    private String describtion;
+    private String description;
     private Date startDate;
     private Date endDate;
     private String author;
