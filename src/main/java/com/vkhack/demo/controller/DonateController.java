@@ -1,10 +1,12 @@
 package com.vkhack.demo.controller;
 
-import com.vkhack.demo.service.DonateService;
-import com.vkhack.demo.service.PostService;
 import com.vkhack.demo.model.Donate;
 import com.vkhack.demo.model.Post;
+import com.vkhack.demo.pojo.CreateDonateResponse;
+import com.vkhack.demo.service.DonateService;
+import com.vkhack.demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,17 +27,16 @@ public class DonateController {
     private PostService postService;
 
     @PostMapping("/create")
-    public ResponseEntity createDonate(@RequestBody Donate donate) {
-        try {
-            Integer price = donate.getPrice();
-            Random random = new Random(price);
-            Integer collectedPrice = random.nextInt(price) + 1;
-            donate.setCollectedPrice(collectedPrice);
-            donateService.save(donate);
-            return ResponseEntity.ok(null);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("createDonate FAILED");
-        }
+    @ResponseStatus(HttpStatus.OK)
+    public CreateDonateResponse createDonate(@RequestBody Donate donate) {
+        Integer price = donate.getPrice();
+        Random random = new Random(price);
+        Integer collectedPrice = random.nextInt(price) + 1;
+        donate.setCollectedPrice(collectedPrice);
+        Donate savedDonate = donateService.save(donate);
+        CreateDonateResponse cdr = new CreateDonateResponse();
+        cdr.setId(savedDonate.getId());
+        return cdr;
     }
 
     @PostMapping("/image/{id}")
