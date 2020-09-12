@@ -27,7 +27,7 @@ public class DonateController {
     private PostService postService;
 
     @PostMapping("/create")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     public CreateDonateResponse createDonate(@RequestBody Donate donate) {
         Integer price = donate.getPrice();
         Random random = new Random(price);
