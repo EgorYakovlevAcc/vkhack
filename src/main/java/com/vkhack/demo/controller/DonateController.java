@@ -103,6 +103,17 @@ public class DonateController {
         }
     }
 
+    @DeleteMapping("/clear/{donateId}")
+    public ResponseEntity removeDonates(@PathVariable("donateId") Long donateId) {
+        try {
+            Donate donate = donateService.findDonateById(donateId);
+            donateService.delete(donate);
+            return ResponseEntity.ok(null);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("getDonateInfo FAILED");
+        }
+    }
+    
     @DeleteMapping("/clear/post/{postId}")
     public ResponseEntity removeDonates(@PathVariable("postId") Long postId) {
         try {
